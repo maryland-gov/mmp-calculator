@@ -44,7 +44,7 @@ import Vue from 'vue';
 Vue.use(VTooltip);
 Vue.use(VueClipboard);
 
-module.exports = {
+export default {
 
 	components: {
 		CalculatorForm,

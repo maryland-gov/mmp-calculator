@@ -4,6 +4,15 @@ dev-build/
 node_modules/
 npm-debug.log
 yarn-error.log
+.parcel-cache/
+.playwright-cli/
+
+# npm run serve artifacts
+dist/index.html
+dist/mmp-calculator.*.css
+dist/mmp-calculator.*.css.map
+dist/mmp-calculator.*.js
+dist/mmp-calculator.*.js.map
 
 # Editor directories and files
 .idea
