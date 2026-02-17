@@ -76,7 +76,7 @@ import {
 
 import copy from "../helpers/copy";
 
-module.exports = {
+export default {
 
 	props: [
 		"values",
@@ -370,7 +370,7 @@ module.exports = {
 	&__message {
 		padding: 0px !important;
 		margin: 20px 0;
-		+ & {
+		& + & {
 			margin-top: 10px;
 		}
 		&.-error {

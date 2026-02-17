@@ -27,7 +27,7 @@ const masks = {
   },
 }
 
-module.exports = {
+export default {
   props: {
   	value: null,
     maskType: String,

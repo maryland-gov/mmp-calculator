@@ -4,6 +4,8 @@ dev-build/
 node_modules/
 npm-debug.log
 yarn-error.log
+.parcel-cache/
+.playwright-cli/
 
 # Editor directories and files
 .idea
