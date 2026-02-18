@@ -37,13 +37,6 @@ import axios from "axios";
 import copy from "../helpers/copy";
 import {tmpl} from "../helpers/functions";
 
-import VTooltip from 'v-tooltip';
-import VueClipboard from 'vue-clipboard2';
-import Vue from 'vue';
-
-Vue.use(VTooltip);
-Vue.use(VueClipboard);
-
 export default {
 
 	components: {

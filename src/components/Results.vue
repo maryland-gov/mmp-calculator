@@ -16,7 +16,8 @@
 				)
 
 			div.mmp-calculator__message.-error(
-				v-for="reason in ineligibleReasons",
+				v-for="(reason, index) in ineligibleReasons",
+			:key="index",
 				v-html="reason"
 			)
 
@@ -26,7 +27,7 @@
 				v-tooltip.top-start="productsHeadingTooltip"
 			)
 			ul.mmp-calculator__results-products
-				li(v-for="product in recommendedProducts")
+				li(v-for="product in recommendedProducts", :key="product.name")
 					h4 {{ product.name }}
 					p {{ product.description }}
 					div.mmp-calculator__results-types-ct
@@ -46,7 +47,7 @@
 										)
 									
 							tbody
-								tr.mmp-calculator__result-type(v-for="type in product.types")
+								tr.mmp-calculator__result-type(v-for="type in product.types", :key="type.type")
 									td.type {{ type.type }}
 									td.rate.t-right 
 										span.mmp-calculator__result-value {{ type.interestRate }}
@@ -98,7 +99,7 @@ export default {
 		this.onResize();
 	},
 	
-	beforeDestroy : function(){
+	beforeUnmount : function(){
 		window.removeEventListener('resize', this.onResize.bind(this) );
 	},
 

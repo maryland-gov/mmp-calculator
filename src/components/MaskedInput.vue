@@ -29,10 +29,11 @@ const masks = {
 
 export default {
   props: {
-  	value: null,
+  	modelValue: null,
     maskType: String,
     tabindex: Number
   },
+  emits: ['update:modelValue'],
   data: function() {
     return {
       inputFocused: false
@@ -53,13 +54,13 @@ export default {
     displayValue: {
       get: function() {
         if (this.inputFocused) {
-          return this.value !== undefined ? this.value.toString() : '';
+          return this.modelValue !== undefined ? this.modelValue.toString() : '';
         } else {
-          return this.value !== undefined ? this.mask(this.value) : '';
+          return this.modelValue !== undefined ? this.mask(this.modelValue) : '';
         }
       },
-      set: function(modifiedValue) {        
-        this.$emit('input', this.unmask(modifiedValue))
+      set: function(modifiedValue) {
+        this.$emit('update:modelValue', this.unmask(modifiedValue))
       }
     }
   }

@@ -1,6 +1,6 @@
 <template lang="pug">
 form.mmp-calculator__form(@submit.prevent="calculate")
-	.mmp-calculator__form-group(v-for="(field, index) in fields")
+	.mmp-calculator__form-group(v-for="(field, index) in fields", :key="index")
 		transition(name="forminput")
 			label.mmp-calculator__form-label(:data-name="field.name")
 				div.mmp-calculator__form-label-text
@@ -50,7 +50,7 @@ form.mmp-calculator__form(@submit.prevent="calculate")
 					.input-wrap
 						select(v-model="formdata.location")
 							option(value="",disabled,hidden) Select County
-							option(v-for="county in counties") {{ county }}
+							option(v-for="county in counties", :key="county") {{ county }}
 
 					.input-wrap.-radios.-fit(v-if="displayTargeting")
 						label
@@ -88,10 +88,7 @@ form.mmp-calculator__form(@submit.prevent="calculate")
 					a.mmp-calculator__share-btn(
 						target="_blank",
 						:href="shareableUrl",
-						@click="preventDefault",
-						v-clipboard:copy="shareableUrl",
-						v-clipboard:success="handleCopyStatus",
-						v-clipboard:error="handleCopyStatus",
+						@click="copyToClipboard"
 					)
 						svg(aria-hidden="true" focusable="false" data-prefix="far" data-icon="copy" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512")
 							path(fill="currentColor" d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z")
@@ -109,7 +106,6 @@ form.mmp-calculator__form(@submit.prevent="calculate")
 </template>
 
 <script>
-import Vue from 'vue';
 import MaskedInput from './MaskedInput.vue';
 import {addCommas} from "../helpers/functions";
 import copy from "../helpers/copy";
@@ -354,17 +350,18 @@ export default {
 		preventDefault : function(e){
 			e.preventDefault();
 		},
-		
-		handleCopyStatus : function(success){
-			clearTimeout( this.copyMessageTimeout );
-			this.copyMessage = success ? 
-				'The link has been copied!' :
-				'Press Ctrl+C to copy the link';
-				
-			this.timeout = setTimeout(()=>{
+
+		copyToClipboard : function(e){
+			e.preventDefault();
+			navigator.clipboard.writeText(this.shareableUrl).then(() => {
+				this.copyMessage = 'The link has been copied!';
+			}).catch(() => {
+				this.copyMessage = 'Press Ctrl+C to copy the link';
+			});
+			clearTimeout(this.copyMessageTimeout);
+			this.copyMessageTimeout = setTimeout(() => {
 				this.copyMessage = '';
 			}, 3000);
-			
 		}
 	}
 };
@@ -609,8 +606,7 @@ export default {
 .forminput-leave-active {
   transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
-.forminput-enter, .forminput-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
+.forminput-enter-from, .forminput-leave-to {
   transform: translateX(10px);
   opacity: 0;
 }
