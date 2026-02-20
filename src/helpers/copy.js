@@ -1,5 +1,9 @@
 import {tmpl} from './functions';
 
+/**
+ * Retrieves copy text from the "Copy" tab in the source 
+ * spreadsheet.
+ */
 class Copy {
 	constructor(){
 		this.strings = {};
