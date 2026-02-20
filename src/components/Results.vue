@@ -67,8 +67,6 @@
 </template>
 
 <script>
-
-import axios from "axios";
 import {
 	num,
 	round,

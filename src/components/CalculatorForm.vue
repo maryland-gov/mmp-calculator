@@ -107,7 +107,6 @@ form.mmp-calculator__form(@submit.prevent="calculate")
 
 <script>
 import MaskedInput from './MaskedInput.vue';
-import {addCommas} from "../helpers/functions";
 import copy from "../helpers/copy";
 
 export default {
@@ -236,11 +235,6 @@ export default {
 	},
 
 	methods : {
-		formatNumber : function( e ){
-			//console.log(e);
-			//e.target.value = addCommas( e.target.value );
-		},
-		
 		calculate : function(e){
 			this.values.data = Object.assign({}, this.formdata);
 			this.$emit('calculate');
@@ -399,8 +393,7 @@ export default {
 		
 		.tooltip-icon {
 			position: absolute;
-			left: -1.8em;
-			margin-left: 0;
+			margin-left: 0.25rem;
 			top: .1em;
 		}
 		
@@ -479,7 +472,7 @@ export default {
 		display: flex;
 		width: 100%;
 		input {
-			height: 2.5em;
+			height: 2.5rem;
 			padding: 0 6px;
 			flex: 1;
 			border-radius: 0;
