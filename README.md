@@ -1,16 +1,12 @@
-# MMP Calculator
+# Maryland Mortgage Program (MMP) Loan Calculator
 
-This calculator was created for the Maryland Mortgage Program (MMP)
-as a way for identify products for borrowers.
+This calculator is designed to help identify potentially eligible MMP loan products based on very basic criteria. 
+- The estimated monthly payments are for principal and interest only.
+- The calculator does not identify eligibility for mortgage credit certificates, which must be determined separately by a lender approved to offer the Maryland HomeCredit Program.
 
 ## Page Assets
 
-To install this code, you must have the `dist/index.css` and `dist/index.js` hosted somewhere publicly accessible.
-
-jsDelivr is a free CDN service that can use Github repositories as the source, so we will be using this repository with these jsDelivr urls:
-
-`https://cdn.jsdelivr.net/gh/owlwatch/mmp-calculator@1.0.4/dist/index.css`
-`https://cdn.jsdelivr.net/gh/owlwatch/mmp-calculator@1.0.4/dist/index.js`
+To use this code, you must have the [`dist/index.css`](./dist/index.css) and [`dist/index.js`](./dist/index.js) hosted somewhere publicly accessible.
 
 ## Google Sheet
 
@@ -18,9 +14,9 @@ The products and county-based limits are sourced from a Google Sheet. In order t
 
 In the example below, we will be using my API key and the Google Sheet that I created, which are both fine to reuse in production.
 
-## Installation
+## Usage
 
-To add this to the page, you will need to include the page assets as well as a target `div` element that has the Google Sheet parameters included as data attributes.
+To use, you will need to include the page assets as well as a target element that has the Google Sheet parameters included as data attributes.
 
 You should be able to copy and paste the following code into the HTML of any page to display the calculator.
 
@@ -30,8 +26,18 @@ You should be able to copy and paste the following code into the HTML of any pag
 	data-google-api-key="AIzaSyDu6xnGN_mGTV5idEi92pGstYH8aOgGJwc"
 	data-google-sheet-id="1bR0zYtpYTWF6xLgt9ZnxBw5sXw1Z8TzjNmaFkjbbXrU"
 ></div>
-<link href="https://cdn.jsdelivr.net/gh/owlwatch/mmp-calculator@1.0.4/dist/index.css" rel="stylesheet" type="text/css" />
-<script src="https://cdn.jsdelivr.net/gh/owlwatch/mmp-calculator@1.0.4/dist/index.js"></script>
+<link href="./dist/index.css" rel="stylesheet" type="text/css" />
+<script src="./dist/index.js"></script>
+```
+
+### Google Sheets API
+
+The calculator pulls all application data (i.e., form labels, additional copy text, calculation values, mortgage products, etc.) from a Google Sheet accessed with a Google Developer .
+
+The following code will allow you to test that the source data is available and working as expected.
+
+```shell
+curl 'https://sheets.googleapis.com/v4/spreadsheets/1bR0zYtpYTWF6xLgt9ZnxBw5sXw1Z8TzjNmaFkjbbXrU/values:batchGet?ranges=Products&ranges=Limits&ranges=Settings&ranges=Copy&ranges=Fields&key=AIzaSyDu6xnGN_mGTV5idEi92pGstYH8aOgGJwc'
 ```
 
 ## Developing
@@ -53,15 +59,18 @@ this page without the need for a page refresh.
 
 ### Vue.js environment
 
-The files are built with Vue.js. Please see [the documentation](https://vuejs.org/v2/guide/)
+The files are built with Vue.js. Please see [the documentation](https://vuejs.org/v3/guide/)
 for more information on how to work with the "components", though it should be pretty
 straightforward since the main classes are all set up.
 
 ### Building
 
-To create a production build, you can run `npm run build`. Once that is done, I recommend
-incrementing the version in the referenced README.md file as well as in the `test.html` file.
-Commit the changes and then create a tag with the incremented version number.
+To create a production build:
+
+1. Run `npm run build`
+2. Update the package version and update the lockfile
+
+Commit the changes and then create a tag with the new version number.
 
 ## Monthly Payment algorithm
 

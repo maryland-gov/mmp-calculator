@@ -1,0 +1,1081 @@
+{
+  "spreadsheetId": "1bR0zYtpYTWF6xLgt9ZnxBw5sXw1Z8TzjNmaFkjbbXrU",
+  "valueRanges": [
+    {
+      "range": "Products!A1:X1018",
+      "majorDimension": "ROWS",
+      "values": [
+        [
+          "name",
+          "type",
+          "interestRate",
+          "firstTimeBuyer only",
+          "studentDebtProduct",
+          "description"
+        ],
+        [
+          "MMP 1st Time Advantage Direct",
+          "FNMA Conv",
+          "6.125%",
+          "",
+          "",
+          "This product does not come with downpayment assistance. Please discuss with your lender whether you are eligible if you do not have your own funds for down payment and closing costs"
+        ],
+        [
+          "MMP 1st Time Advantage Direct",
+          "FHLMC Conv",
+          "6.125%",
+          "Y",
+          "",
+          "This product does not come with downpayment assistance. Please discuss with your lender whether you are eligible if you do not have your own funds for down payment and closing costs"
+        ],
+        [
+          "MMP 1st Time Advantage Direct",
+          "Government",
+          "5.875%",
+          "Y",
+          "",
+          "This product does not come with downpayment assistance. Please discuss with your lender whether you are eligible if you do not have your own funds for down payment and closing costs"
+        ],
+        [
+          "MMP 1st Time Advantage Direct",
+          "FHA Limited 203(k)",
+          "5.875%",
+          "Y",
+          "",
+          "This product does not come with downpayment assistance. Please discuss with your lender whether you are eligible if you do not have your own funds for down payment and closing costs"
+        ],
+        [
+          "MMP 1st Time Advantage 6000",
+          "FNMA Conv",
+          "6.500%",
+          "Y",
+          "",
+          "Comes with a $6,000 DPA loan\nMay utilize Partner Match if applicable"
+        ],
+        [
+          "MMP 1st Time Advantage 6000",
+          "FHLMC Conv",
+          "6.500%",
+          "Y",
+          "",
+          "Comes with a $6,000 DPA loan\nMay utilize Partner Match if applicable"
+        ],
+        [
+          "MMP 1st Time Advantage 6000",
+          "Government",
+          "6.000%",
+          "Y",
+          "",
+          "Comes with a $6,000 DPA loan\nMay utilize Partner Match if applicable"
+        ],
+        [
+          "MMP 1st Time Advantage 6000",
+          "FHA Limited 203(k)",
+          "6.000%",
+          "Y",
+          "",
+          "Comes with a $6,000 DPA loan\nMay utilize Partner Match if applicable"
+        ],
+        [
+          "MMP 1st Time Advantage 3% Loan",
+          "FNMA Conv",
+          "6.500%",
+          "Y",
+          "",
+          "Comes with a DPA loan equal to 3% of the first mortgage"
+        ],
+        [
+          "MMP 1st Time Advantage 3% Loan",
+          "FHLMC Conv",
+          "6.500%",
+          "Y",
+          "",
+          "Comes with a DPA loan equal to 3% of the first mortgage"
+        ],
+        [
+          "MMP 1st Time Advantage 3% Loan",
+          "Government",
+          "6.000%",
+          "Y",
+          "",
+          "Comes with a DPA loan equal to 3% of the first mortgage"
+        ],
+        [
+          "MMP 1st Time Advantage 3% Loan",
+          "FHA Limited 203(k)",
+          "6.000%",
+          "Y",
+          "",
+          "Comes with a DPA loan equal to 3% of the first mortgage"
+        ],
+        [
+          "MMP 1st Time Advantage 4% Loan",
+          "FNMA Conv",
+          "6.625%",
+          "Y",
+          "",
+          "Comes with a DPA loan equal to 4% of the first mortgage"
+        ],
+        [
+          "MMP 1st Time Advantage 4% Loan",
+          "FHLMC Conv",
+          "6.625%",
+          "Y",
+          "",
+          "Comes with a DPA loan equal to 4% of the first mortgage"
+        ],
+        [
+          "MMP 1st Time Advantage 4% Loan",
+          "Government",
+          "6.125%",
+          "Y",
+          "",
+          "Comes with a DPA loan equal to 4% of the first mortgage"
+        ],
+        [
+          "MMP 1st Time Advantage 4% Loan",
+          "FHA Limited 203(k)",
+          "6.125%",
+          "Y",
+          "",
+          "Comes with a DPA loan equal to 4% of the first mortgage"
+        ],
+        [
+          "MMP 1st Time Advantage 5% Loan",
+          "FNMA Conv",
+          "6.750%",
+          "Y",
+          "",
+          "Comes with a DPA loan equal to 5% of the first mortgage"
+        ],
+        [
+          "MMP 1st Time Advantage 5% Loan",
+          "FHLMC Conv",
+          "6.750%",
+          "Y",
+          "",
+          "Comes with a DPA loan equal to 5% of the first mortgage"
+        ],
+        [
+          "MMP 1st Time Advantage 5% Loan",
+          "Government",
+          "6.250%",
+          "Y",
+          "",
+          "Comes with a DPA loan equal to 5% of the first mortgage"
+        ],
+        [
+          "MMP 1st Time Advantage 5% Loan",
+          "FHA Limited 203(k)",
+          "6.250%",
+          "Y",
+          "",
+          "Comes with a DPA loan equal to 5% of the first mortgage"
+        ],
+        [
+          "HomeStart",
+          "FNMA Conv",
+          "6.375%",
+          "Y",
+          "",
+          "For borrowers with ≤50% AMI .\nComes with a DPA loan equal to 6% of the first mortgage."
+        ],
+        [
+          "HomeStart",
+          "FHLMC Conv",
+          "6.375%",
+          "Y",
+          "",
+          "For borrowers with ≤50% AMI .\nComes with a DPA loan equal to 6% of the first mortgage."
+        ],
+        [
+          "HomeStart",
+          "Government",
+          "6.000%",
+          "Y",
+          "",
+          "For borrowers with ≤50% AMI .\nComes with a DPA loan equal to 6% of the first mortgage."
+        ],
+        [
+          "HomeStart",
+          "FHA Limited 203(k)",
+          "6.000%",
+          "Y",
+          "",
+          "For borrowers with ≤50% AMI .\nComes with a DPA loan equal to 6% of the first mortgage."
+        ],
+        [
+          "MMP Flex Direct",
+          "FNMA Conv",
+          "6.500%",
+          "",
+          "",
+          "This product does not come with downpayment assistance. Please discuss with your lender whether you are eligible if you do not have your own funds for down payment and closing costs"
+        ],
+        [
+          "MMP Flex Direct",
+          "FHLMC Conv",
+          "6.500%",
+          "",
+          "",
+          "This product does not come with downpayment assistance. Please discuss with your lender whether you are eligible if you do not have your own funds for down payment and closing costs"
+        ],
+        [
+          "MMP Flex Direct",
+          "Government",
+          "6.250%",
+          "",
+          "",
+          "This product does not come with downpayment assistance. Please discuss with your lender whether you are eligible if you do not have your own funds for down payment and closing costs"
+        ],
+        [
+          "MMP Flex Direct",
+          "FHA Limited 203(k)",
+          "6.250%",
+          "",
+          "",
+          "This product does not come with downpayment assistance. Please discuss with your lender whether you are eligible if you do not have your own funds for down payment and closing costs"
+        ],
+        [
+          "MMP Flex 6000",
+          "FNMA Conv",
+          "6.875%",
+          "",
+          "",
+          "Comes with a $6,000 DPA loan\nMay utilize Partner Match if applicable"
+        ],
+        [
+          "MMP Flex 6000",
+          "FHLMC Conv",
+          "6.875%",
+          "",
+          "",
+          "Comes with a $6,000 DPA loan\nMay utilize Partner Match if applicable"
+        ],
+        [
+          "MMP Flex 6000",
+          "Government",
+          "6.375%",
+          "",
+          "",
+          "Comes with a $6,000 DPA loan\nMay utilize Partner Match if applicable"
+        ],
+        [
+          "MMP Flex 6000",
+          "FHA Limited 203(k)",
+          "6.375%",
+          "",
+          "",
+          "Comes with a $6,000 DPA loan\nMay utilize Partner Match if applicable"
+        ],
+        [
+          "MMP Flex 3% Loan",
+          "FNMA Conv",
+          "6.875%",
+          "",
+          "",
+          "Comes with a DPA loan equal to 3% of the first mortgage"
+        ],
+        [
+          "MMP Flex 3% Loan",
+          "FHLMC Conv",
+          "6.875%",
+          "",
+          "",
+          "Comes with a DPA loan equal to 3% of the first mortgage"
+        ],
+        [
+          "MMP Flex 3% Loan",
+          "Government",
+          "6.375%",
+          "",
+          "",
+          "Comes with a DPA loan equal to 3% of the first mortgage"
+        ],
+        [
+          "MMP Flex 3% Loan",
+          "FHA Limited 203(k)",
+          "6.375%",
+          "",
+          "",
+          "Comes with a DPA loan equal to 3% of the first mortgage"
+        ],
+        [
+          "Maryland SmartBuy - NoDPA",
+          "FNMA Conv",
+          "6.500%",
+          "",
+          "Y",
+          "For first-time homebuyers with student debt. \nConventional Only.  No DPA"
+        ],
+        [
+          "Maryland SmartBuy - NoDPA",
+          "FHLMC Conv",
+          "6.500%",
+          "",
+          "Y",
+          "For first-time homebuyers with student debt. \nConventional Only.  No DPA"
+        ],
+        [
+          "Maryland SmartBuy 6000",
+          "FNMA Conv",
+          "6.500%",
+          "",
+          "Y",
+          "For first-time homebuyers with student debt. \nConventional Only.  Three DPA Options Available."
+        ],
+        [
+          "Maryland SmartBuy 6000",
+          "FHLMC Conv",
+          "6.500%",
+          "",
+          "Y",
+          "For first-time homebuyers with student debt. \nConventional Only.  Three DPA Options Available."
+        ],
+        [
+          "Maryland SmartBuy 6%",
+          "FHLMC Conv",
+          "6.375%",
+          "",
+          "Y",
+          "For first-time homebuyers with\u003c50% AMI"
+        ],
+        [
+          "Maryland SmartBuy 6%",
+          "FHLMC Conv",
+          "6.375%",
+          "",
+          "Y",
+          "For first-time homebuyers with\u003c50% AMI"
+        ],
+        [
+          "Maryland HomeAbility",
+          "FHLMC Conv",
+          "6.500%",
+          "Y",
+          "",
+          "For first-time homebuyers with disabilities. DPA available up to 25% or the purchase price, not to exceed tthe total loan-to-value ratio of 105%\nSpecial Income Limits apply."
+        ],
+        [
+          "Maryland HomeAbility",
+          "FNMA Conv",
+          "6.500%",
+          "Y",
+          "",
+          "For first-time homebuyers with disabilities. DPA available up to 25% or the purchase price, not to exceed tthe total loan-to-value ratio of 105%\nSpecial Income Limits apply."
+        ],
+        [
+          "Montgomery Homeownership",
+          "FHLMC Conv",
+          "6.625%",
+          "Y",
+          "",
+          "For first-time homebuyers, includes a DPA loan up to 40% of household income (maximum $25,000)."
+        ],
+        [
+          "Montgomery Homeownership",
+          "FNMA Conv",
+          "6.625%",
+          "Y",
+          "",
+          "For first-time homebuyers, includes a DPA loan up to 40% of household income (maximum $25,000)."
+        ],
+        [
+          "Montgomery Homeownership",
+          "Government",
+          "6.375%",
+          "Y",
+          "",
+          "For first-time homebuyers, includes a DPA loan up to 40% of household income (maximum $25,000)."
+        ],
+        [
+          "Montgomery Homeownership",
+          "FHA Limited 203(k)",
+          "6.375%",
+          "Y",
+          "",
+          "For first-time homebuyers, includes a DPA loan up to 40% of household income (maximum $25,000)."
+        ],
+        [
+          "Montgomery Employee Down Payment Assistance Loan",
+          "FHLMC Conv",
+          "6.625%",
+          "Y",
+          "",
+          "For first-time homebuyers looking to purchase a home in Montgomery County. Must be employed by certain departments in the county in order to qualify. Comes with a $25,000 DPA loan."
+        ],
+        [
+          "Montgomery Employee Down Payment Assistance Loan",
+          "FNMA Conv",
+          "6.625%",
+          "Y",
+          "",
+          "For first-time homebuyers looking to purchase a home in Montgomery County. Must be employed by certain departments in the county in order to qualify. Comes with a $25,000 DPA loan."
+        ],
+        [
+          "Montgomery Employee Down Payment Assistance Loan",
+          "Government",
+          "6.375%",
+          "Y",
+          "",
+          "For first-time homebuyers looking to purchase a home in Montgomery County. Must be employed by certain departments in the county in order to qualify. Comes with a $25,000 DPA loan."
+        ],
+        [
+          "Montgomery Employee Down Payment Assistance Loan",
+          "FHA Limited 203(k)",
+          "6.375%",
+          "Y",
+          "",
+          "For first-time homebuyers looking to purchase a home in Montgomery County. Must be employed by certain departments in the county in order to qualify. Comes with a $25,000 DPA loan."
+        ]
+      ]
+    },
+    {
+      "range": "Limits!A1:Z974",
+      "majorDimension": "ROWS",
+      "values": [
+        [
+          "county",
+          "note",
+          "householdSize",
+          "incomeNonTargeted",
+          "incomeTargeted",
+          "acquisitionNonTargeted",
+          "acquisitionTargeted",
+          "maxMortgageAmount"
+        ],
+        [
+          "Allegany County",
+          "1",
+          "1-2",
+          "",
+          "$158,040",
+          "",
+          "$665,173",
+          "$524,225"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "",
+          "$184,380",
+          "",
+          "$665,173"
+        ],
+        [
+          "Anne Arundel County",
+          "2",
+          "1-2",
+          "$136,529",
+          "$158,040",
+          "$759,315",
+          "$928,051",
+          "$731,400"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "$157,008",
+          "$184,380",
+          "$759,315",
+          "$928,051"
+        ],
+        [
+          "Baltimore City",
+          "1",
+          "1-2",
+          "",
+          "$158,040",
+          "",
+          "$928,051",
+          "$731,400"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "",
+          "$184,380",
+          "",
+          "$928,051"
+        ],
+        [
+          "Baltimore County",
+          "2",
+          "1-2",
+          "$136,529",
+          "$158,040",
+          "$759,315",
+          "$928,051",
+          "$731,400"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "$157,008",
+          "$184,380",
+          "$759,315",
+          "$928,051"
+        ],
+        [
+          "Calvert County",
+          "",
+          "1-2",
+          "$190,320",
+          "",
+          "$1,255,921",
+          "",
+          "$806,500"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "$222,040",
+          "",
+          "$1,255,921"
+        ],
+        [
+          "Caroline County",
+          "1",
+          "1-2",
+          "",
+          "$158,040",
+          "",
+          "$665,173",
+          "$524,225"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "",
+          "$184,380",
+          "",
+          "$665,173"
+        ],
+        [
+          "Carroll County",
+          "",
+          "1-2",
+          "$136,529",
+          "",
+          "$759,315",
+          "",
+          "$731,400"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "$157,008",
+          "",
+          "$759,315"
+        ],
+        [
+          "Cecil County",
+          "",
+          "1-2",
+          "$131,700",
+          "",
+          "$617,242",
+          "",
+          "$594,550"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "$151,455",
+          "",
+          "$617,242"
+        ],
+        [
+          "Charles County",
+          "",
+          "1-2",
+          "$196,680",
+          "",
+          "$1,255,921",
+          "",
+          "$806,500"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "$229,460",
+          "",
+          "$1,255,921"
+        ],
+        [
+          "Dorchester County",
+          "1",
+          "1-2",
+          "",
+          "$158,040",
+          "",
+          "$665,173",
+          "$524,225"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "",
+          "$184,380",
+          "",
+          "$665,173"
+        ],
+        [
+          "Frederick County",
+          "2",
+          "1-2",
+          "$196,680",
+          "$196,680",
+          "$1,255,921",
+          "$1,535,015",
+          "$806,500"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "$229,460",
+          "$229,460",
+          "$1,255,921",
+          "$1,535,015"
+        ],
+        [
+          "Garrett County",
+          "1",
+          "1-2",
+          "",
+          "$158,040",
+          "",
+          "$665,173",
+          "$524,225"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "",
+          "$184,380",
+          "",
+          "$665,173"
+        ],
+        [
+          "Harford County",
+          "2",
+          "1-2",
+          "$136,529",
+          "$158,040",
+          "$759,315",
+          "$928,051",
+          "$731,400"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "$157,008",
+          "$184,380",
+          "$759,315",
+          "$928,051"
+        ],
+        [
+          "Howard County",
+          "",
+          "1-2",
+          "$136,529",
+          "",
+          "$759,315",
+          "",
+          "$731,400"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "$157,008",
+          "",
+          "$759,315"
+        ],
+        [
+          "Kent County",
+          "1",
+          "1-2",
+          "",
+          "$158,040",
+          "",
+          "$665,173",
+          "$524,225"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "",
+          "$184,380",
+          "",
+          "$665,173"
+        ],
+        [
+          "Montgomery County",
+          "2",
+          "1-2",
+          "$196,680",
+          "$196,680",
+          "$1,255,921",
+          "$1,535,015",
+          "$806,500"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "$229,460",
+          "$229,460",
+          "$1,255,921",
+          "$1,535,015"
+        ],
+        [
+          "Prince George's County",
+          "2",
+          "1-2",
+          "$196,680",
+          "$196,680",
+          "$1,255,921",
+          "$1,535,015",
+          "$806,500"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "$229,460",
+          "$229,460",
+          "$1,255,921",
+          "$1,535,015"
+        ],
+        [
+          "Queen Anne's County",
+          "",
+          "1-2",
+          "$136,529",
+          "",
+          "$759,315",
+          "",
+          "$731,400"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "$157,008",
+          "",
+          "$759,315"
+        ],
+        [
+          "St. Mary's County",
+          "",
+          "1-2",
+          "$131,700",
+          "",
+          "$544,233",
+          "",
+          "$524,225"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "$151,455",
+          "",
+          "$544,233"
+        ],
+        [
+          "Somerset County",
+          "1",
+          "1-2",
+          "",
+          "$158,040",
+          "",
+          "$665,173",
+          "$524,225"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "",
+          "$184,380",
+          "",
+          "$665,173"
+        ],
+        [
+          "Talbot County",
+          "",
+          "1-2",
+          "$131,700",
+          "$158,040",
+          "$544,233",
+          "$665,173",
+          "$524,225"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "$151,455",
+          "$184,380",
+          "$544,233",
+          "$665,173"
+        ],
+        [
+          "Washington County",
+          "2",
+          "1-2",
+          "$131,700",
+          "$158,040",
+          "$544,233",
+          "$665,173",
+          "$524,225"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "$151,455",
+          "$184,380",
+          "$544,233",
+          "$665,173"
+        ],
+        [
+          "Wicomi\u200bco County",
+          "2",
+          "1-2",
+          "$131,700",
+          "$158,040",
+          "$544,233",
+          "$665,173",
+          "$524,225"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "$151,455",
+          "$184,380",
+          "$544,233",
+          "$665,173"
+        ],
+        [
+          "Worcester County",
+          "",
+          "1-2",
+          "$131,700",
+          "$158,040",
+          "$544,233",
+          "$665,173",
+          "$524,225"
+        ],
+        [
+          "",
+          "",
+          "3+",
+          "$151,455",
+          "$184,380",
+          "$544,233",
+          "$665,173"
+        ]
+      ]
+    },
+    {
+      "range": "Settings!A1:Z1000",
+      "majorDimension": "ROWS",
+      "values": [
+        [
+          "Monthly Percentage Of Income",
+          "28.00%"
+        ],
+        [
+          "Maximum Mortgage Amount"
+        ]
+      ]
+    },
+    {
+      "range": "Copy!A1:Z1003",
+      "majorDimension": "ROWS",
+      "values": [
+        [
+          "Variable Name (Do not change)",
+          "Copy",
+          "Available Variables",
+          "Notes"
+        ],
+        [
+          "Limits Footnote 1",
+          "Entire jurisdiction is targeted - borrowers do not have to be first-time homebuyers.",
+          "",
+          "https://www.markdownguide.org/basic-syntax"
+        ],
+        [
+          "Limits Footnote 2",
+          "Jurisdiction contains certain targeted census tracts (refer to http://mmp.maryland.gov/Pages/Property-Information.aspx for information on Targeted Areas) in which borrowers do not have to be first-time homebuyers.",
+          "",
+          "\nFor any of these fields, you can use markdown syntax (see link above). You can also use any variables indicated the \"Availalbe Variables\" column. To do so, surround the variable name with \"{\" \"}\" charachters, like so:\n\n{ VARIABLE_NAME }"
+        ],
+        [
+          "Eligible Heading",
+          "Possible Matches"
+        ],
+        [
+          "Eligible Heading Tooltip"
+        ],
+        [
+          "Products Heading",
+          "Products"
+        ],
+        [
+          "Products Heading Tooltip"
+        ],
+        [
+          "Eligible Message",
+          "The loan products listed below may be a good fit for your situation solely based on the data you provided. Please note that the Principal&Interest (P&I) figures listed below are only estimative as they do not include the escrow monthly payment portion which can significantly increase the monthly total mortgage payment for homeoweners. The escrow payment is calculated by the mortgage lender before the mortgage loan settlement and it depends on the homeowner insurance level, property insurance level and other annual expenses that the property may be subject to. These calculations are specific to each property and cannot be estimated in this calculator.\n\nFor your household size, in **{COUNTY}**, the Maryland Mortgage Program (MMP) has a household income limit of **{HOUSEHOLD_LIMIT}** and a loan limit of **{MAXIMUM_MORTGAGE}**. For more information, [contact a Maryland Mortgage Program lender](https://mmp.maryland.gov/pages/find-a-lender.aspx).",
+          "COUNTY\nHOUSEHOLD_INCOME\nHOUSEHOLD_LIMIT\nHOUSEHOLD_SIZE\nMAXIMUM_MORTGAGE\nPURCHASE_PRICE"
+        ],
+        [
+          "Ineligible Message",
+          "Please contact a Maryland Mortgage Program lender to go through your data to see if they can assist you, due to the below reasons. Please find a lender at https://mmp.maryland.gov/pages/find-a-lender.aspx\n ",
+          "COUNTY\nHOUSEHOLD_INCOME\nHOUSEHOLD_LIMIT\nHOUSEHOLD_SIZE\nMAXIMUM_MORTGAGE\nPURCHASE_PRICE"
+        ],
+        [
+          "Empty Form",
+          "Please complete the form to see your results."
+        ],
+        [
+          "Error: Downpayment Amount",
+          "It looks like you have an error in the form. The down payment is larger than the purchase price.",
+          "DOWNPAYMENT_AMOUNT\nPURCHASE_PRICE"
+        ],
+        [
+          "Error: Primary Residence",
+          "The MMP products are only available to homebuyers who use the mortgage loan toward their primary residence."
+        ],
+        [
+          "Income Exceeded",
+          "Your household income of **{ HOUSEHOLD_INCOME }**  exceeds the maximum allowed income for { COUNTY } of **{ INCOME_LIMIT }**.",
+          "COUNTY\nDOWNPAYMENT_AMOUNT\nHOUSEHOLD_INCOME\nINCOME_LIMIT\nPURCHASE_PRICE"
+        ],
+        [
+          "Loan Amount Exceeded",
+          "Your loan amount of **{ LOAN_AMOUNT }** exceeds the maximum allowed loan amount for **{ COUNTY }** of **{ MAXIMUM_LOAN_AMOUNT }**.",
+          "COUNTY\nDOWNPAYMENT_AMOUNT\nHOUSEHOLD_INCOME\nINCOME_LIMIT\nLOAN_AMOUNT\nMAXIMUM_LOAN_AMOUNT\nPURCHASE_PRICE"
+        ],
+        [
+          "Print",
+          "Print Results"
+        ],
+        [
+          "Calculate",
+          "Calculate"
+        ],
+        [
+          "Recalculate",
+          "Recalculate"
+        ],
+        [
+          "Interest Rate",
+          "Interest Rate"
+        ],
+        [
+          "Interest Rate Tooltip"
+        ],
+        [
+          "Monthly Payment",
+          "Monthly Payment \u003cnobr\u003e(P & I)\u003c/nobr\u003e"
+        ],
+        [
+          "Monthly Payment Tooltip",
+          "The monthly payment does not include the escrow payment."
+        ],
+        [
+          "Email Subject",
+          "MMP Calculator Results"
+        ]
+      ]
+    },
+    {
+      "range": "Fields!A1:Z1004",
+      "majorDimension": "ROWS",
+      "values": [
+        [
+          "Variable Name",
+          "Label",
+          "Tooltip",
+          "Type",
+          "Description",
+          "Options (if dropdown)",
+          "Comments"
+        ],
+        [
+          "isFirstTimeBuyer",
+          "Are you a first-time homebuyer?",
+          "",
+          "Yes No Question"
+        ],
+        [
+          "isPrimaryResidence",
+          "Is this house going to be your primary residence?",
+          "",
+          "Yes No Question"
+        ],
+        [
+          "hasStudentDebt",
+          "Do you have student debt?",
+          "",
+          "Yes No Question"
+        ],
+        [
+          "householdIncome",
+          "Total Household Income",
+          "",
+          "Currency"
+        ],
+        [
+          "householdSize",
+          "Household Size",
+          "",
+          "BuiltIn"
+        ],
+        [
+          "purchasePrice",
+          "What is the purchase price of the property?",
+          "",
+          "Currency"
+        ],
+        [
+          "downPayment",
+          "What is the down payment amount?",
+          "This is the money you may have to provide at settlement.",
+          "Currency"
+        ],
+        [
+          "location",
+          "Location of purchase property",
+          "",
+          "BuiltIn",
+          "Purchase price limit depends on the county it is in ",
+          "",
+          "This includes the \"Targeted / Non-Targeted\" fields"
+        ]
+      ]
+    }
+  ]
+}
