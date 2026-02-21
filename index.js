@@ -1,10 +1,8 @@
-import "@babel/polyfill";
-import Vue from 'vue';
+import { createApp, h } from 'vue';
+import FloatingVue from 'floating-vue';
 import App from './src/components/App.vue';
 
-if (window.NodeList && !NodeList.prototype.forEach) {
-    NodeList.prototype.forEach = Array.prototype.forEach;
-}
+import 'floating-vue/dist/style.css';
 
 function init(){
 	let nodes = document.querySelectorAll('[data-component="mmp-mortgage-calculator"]');
@@ -13,17 +11,16 @@ function init(){
 			return;
 		}
 		else {
-			window.calculator = new Vue({
-			  el: node,
-			  render: function(h){
-				  return h(App, {
-					  props: {
-						  googleSheetId: node.dataset.googleSheetId,
-						  googleApiKey: node.dataset.googleApiKey
-					  }
-				  })
-			  }
+			const app = createApp({
+				render() {
+					return h(App, {
+						googleSheetId: node.dataset.googleSheetId,
+						googleApiKey: node.dataset.googleApiKey
+					});
+				}
 			});
+			app.use(FloatingVue);
+			window.calculator = app.mount(node);
 		}
 	});
 }
