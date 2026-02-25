@@ -1,28 +1,29 @@
 <template lang="pug">
 .mmp-calculator
 	template(v-if="initialized")
-		.row-fluid
-			.col.span6
-				calculator-form(
-					ref="form",
-					:values="values",
-					:settings="settings",
-					:limits="limits",
-					:counties="counties"
-					:fields="fields"
-					:initialized="initialized"
-					@calculate="scrollToResults"
-				)
-			.col.span6
-				results(
-					ref="results",
-					:fields="fields",
-					:values="values",
-					:products="products",
-					:limits="limits",
-					:settings="settings",
-					:initialized="initialized"
-				)
+		.grid-container
+			.grid-row.grid-gap
+				div(class="tablet:grid-col-6")
+					calculator-form(
+						ref="form",
+						:values="values",
+						:settings="settings",
+						:limits="limits",
+						:counties="counties"
+						:fields="fields"
+						:initialized="initialized"
+						@calculate="scrollToResults"
+					)
+				div(class="tablet:grid-col-6")
+					results(
+						ref="results",
+						:fields="fields",
+						:values="values",
+						:products="products",
+						:limits="limits",
+						:settings="settings",
+						:initialized="initialized"
+					)
 	.loading(v-else) Loading
 </template>
 
@@ -223,20 +224,13 @@ export default {
 <style lang="scss">
 .mmp-calculator {
 	text-align: left;
-	margin: 20px 30px;
-	@media( min-width: 800px ){
-		margin: 20px 60px;
-	}
-	@media( min-width: 1200px ){
-		margin: 20px auto;
-		width: 80%;
-	}
+	padding: 20px 0;
 	line-height: 1.5;
 	p {
 		width: auto !important;
 		padding-left: 0 !important;
 	}
-	.col {
+	[class*="grid-col"] {
 		margin-bottom: 2em;
 	}
 	@media( min-width: 768px ){

@@ -1,108 +1,105 @@
 <template lang="pug">
-form.mmp-calculator__form(@submit.prevent="calculate")
-	.mmp-calculator__form-group(v-for="(field, index) in fields", :key="index")
+form.usa-form.mmp-calculator__form(@submit.prevent="calculate")
+	.usa-form-group(v-for="(field, index) in fields", :key="index")
 		transition(name="forminput")
-			label.mmp-calculator__form-label(:data-name="field.name")
-				div.mmp-calculator__form-label-text
+			div(:data-name="field.name")
+				label.usa-label
 					span(v-html="field.label")
 					span.tooltip-icon(
 						v-if="field.tooltip",
 						v-tooltip.top-start="{content: field.tooltip, trigger: 'hover click'}",
 						@focus="tooltipFocus"
 					)
-						
-					div.mmp-calculator__form-label-description(
-						v-if="field.description",
-						v-html="field.description"
-					)
-				
+				span.usa-hint(
+					v-if="field.description",
+					v-html="field.description"
+				)
+
 				template(v-if="field.Type == 'Currency'")
-					.input-wrap.-bordered
-						span.input-context $
-						masked-input(
+					.usa-input-group
+						span.usa-input-prefix(aria-hidden="true") $
+						masked-input.usa-input(
 							type="text",
 							v-model="formdata[field.name]",
 							mask-type="currency"
 						)
-				
+
 				template(v-else-if="field.Type == 'Yes No Question'")
-					.input-wrap.-radios.-fit
-						label
-							input(type="radio",:name="field.name",value="N",v-model="formdata[field.name]")
-							span No
-						label
-							input(type="radio",:name="field.name",value="Y",v-model="formdata[field.name]")
-							span Yes
-							
+					.usa-radio-group
+						.usa-radio
+							input.usa-radio__input(type="radio",:id="field.name + '_no'",:name="field.name",value="N",v-model="formdata[field.name]")
+							label.usa-radio__label(:for="field.name + '_no'") No
+						.usa-radio
+							input.usa-radio__input(type="radio",:id="field.name + '_yes'",:name="field.name",value="Y",v-model="formdata[field.name]")
+							label.usa-radio__label(:for="field.name + '_yes'") Yes
+
 				template(v-else-if="field.Type == 'BuiltIn' && field.name == 'householdSize'")
-					.input-wrap.-radios.-fit
-						label
-							input(type="radio",name="householdSize",value="1",v-model="formdata.householdSize")
-							span 1
-						label
-							input(type="radio",name="householdSize",value="2",v-model="formdata.householdSize")
-							span 2
-						label
-							input(type="radio",name="householdSize",value="3+",v-model="formdata.householdSize")
-							span 3+
-							
+					.usa-radio-group
+						.usa-radio
+							input.usa-radio__input(type="radio",id="householdSize_1",name="householdSize",value="1",v-model="formdata.householdSize")
+							label.usa-radio__label(for="householdSize_1") 1
+						.usa-radio
+							input.usa-radio__input(type="radio",id="householdSize_2",name="householdSize",value="2",v-model="formdata.householdSize")
+							label.usa-radio__label(for="householdSize_2") 2
+						.usa-radio
+							input.usa-radio__input(type="radio",id="householdSize_3",name="householdSize",value="3+",v-model="formdata.householdSize")
+							label.usa-radio__label(for="householdSize_3") 3+
+
 				template(v-else-if="field.Type == 'BuiltIn' && field.name == 'location'")
-					.input-wrap
-						select(v-model="formdata.location")
-							option(value="",disabled,hidden) Select County
-							option(v-for="county in counties", :key="county") {{ county }}
+					select.usa-select(v-model="formdata.location")
+						option(value="",disabled,hidden) Select County
+						option(v-for="county in counties", :key="county") {{ county }}
 
-					.input-wrap.-radios.-fit(v-if="displayTargeting")
-						label
-							input(type="radio",name="targeted",value="Y",v-model="formdata.targeted")
-							span Targeted
-						label
-							input(type="radio",name="targeted",value="N",v-model="formdata.targeted")
-							span Non-Targeted
+					.usa-radio-group(v-if="displayTargeting")
+						.usa-radio
+							input.usa-radio__input(type="radio",id="targeted_yes",name="targeted",value="Y",v-model="formdata.targeted")
+							label.usa-radio__label(for="targeted_yes") Targeted
+						.usa-radio
+							input.usa-radio__input(type="radio",id="targeted_no",name="targeted",value="N",v-model="formdata.targeted")
+							label.usa-radio__label(for="targeted_no") Non-Targeted
 
-					div.-limits-footnote(v-if="targetingFootnote",v-html="targetingFootnote")
-				
+					span.usa-hint.-limits-footnote(v-if="targetingFootnote",v-html="targetingFootnote")
+
 	.mmp-calculator__form-actions
-		button.mmp-calculator__button(
+		button.usa-button(
 			type="submit",
 			:disabled="calculateButtonDisabled"
 		) {{ calculateButtonText }}
 		| &nbsp;
-		button.mmp-calculator__button(
+		button.usa-button.usa-button--outline(
 			v-if="showPrintButton",
 			type="button",
 			@click="print"
 		) {{ printButtonText }}
-		
-		br
-			
-		.mmp-calculator__share(v-if="showPrintButton")
-			label
-				span.mmp-calculator__share-label Share your results
-				.mmp-calculator__share-input
-					input(
-						type="text",
-						:value="shareableUrl",
-						readonly
-					)
-					a.mmp-calculator__share-btn(
-						target="_blank",
-						:href="shareableUrl",
-						@click="copyToClipboard"
-					)
-						svg(aria-hidden="true" focusable="false" data-prefix="far" data-icon="copy" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512")
-							path(fill="currentColor" d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z")
-						div.mmp-calculator__copy-message(
-							v-html="copyMessage",
-							:class="{'animated fadeInUp': !!copyMessage}"
-						)
 
-					a.mmp-calculator__share-btn(
-						target="_blank",
-						:href="mailToUrl"
+		br
+
+		.mmp-calculator__share(v-if="showPrintButton")
+			label.usa-label Share your results
+			.usa-input-group.mmp-calculator__share-input
+				input.usa-input(
+					type="text",
+					:value="shareableUrl",
+					readonly
+				)
+				a.mmp-calculator__share-btn(
+					target="_blank",
+					:href="shareableUrl",
+					@click="copyToClipboard"
+				)
+					svg(aria-hidden="true" focusable="false" data-prefix="far" data-icon="copy" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512")
+						path(fill="currentColor" d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z")
+					div.mmp-calculator__copy-message(
+						v-html="copyMessage",
+						:class="{'animated fadeInUp': !!copyMessage}"
 					)
-						svg(aria-hidden="true" focusable="false" data-prefix="far" data-icon="envelope" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512")
-							path(fill="currentColor" d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z")
+
+				a.mmp-calculator__share-btn(
+					target="_blank",
+					:href="mailToUrl"
+				)
+					svg(aria-hidden="true" focusable="false" data-prefix="far" data-icon="envelope" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512")
+						path(fill="currentColor" d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z")
 </template>
 
 <script>
@@ -367,83 +364,52 @@ export default {
 		display: flex;
 		flex-wrap: wrap;
 	}
-	&-group {
+
+	.usa-form-group {
 		@media print {
 			width: 50%;
 			margin-bottom: 2rem;
 		}
-		+ .mmp-calculator__form-group {
-			margin-top: 1.5em;
-			@media print {
-				margin-top: 0;
-			}
+	}
+
+	.usa-label {
+		.tooltip-icon {
+			position: relative;
+			margin-left: 0.25rem;
+			top: -0.1em;
 		}
 	}
-	&-label {
-		position: relative;
-		font-size: 1rem;
+
+	.usa-hint {
 		display: block;
-		font-weight: bold;
-		&-text {
-			display: block;
-			font-weight: bold;
-			margin-bottom: 0.4em;
+		p {
+			font-size: 14px;
+			margin-bottom: 0 !important;
 		}
-		
-		
-		.tooltip-icon {
-			position: absolute;
-			margin-left: 0.25rem;
-			top: .1em;
-		}
-		
-		
-		&-description {
-			font-weight: normal;
-			p {
-				font-size: 14px;
-				margin-bottom: 0 !important;
-			}
-		}
-		> input, > .input-wrap {
-			margin-top: 0.5em;
-			margin-bottom: 0.333em;
+	}
+
+	.usa-radio-group {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-top: 0.5rem;
+		.usa-radio {
+			margin-top: 0;
 		}
 	}
 
 	&-actions {
-		margin-top: 10px;
-		padding-top: 10px;
+		margin-top: 1.5rem;
+		padding-top: 1rem;
 		@media print {
 			display: none;
+		}
+		.usa-button + .usa-button {
+			margin-left: 0.5rem;
 		}
 	}
 }
 
-.mmp-calculator__button {
-	background: #FFC20D;
-	color: #333;
-	padding: 10px 40px;
-	border: 0;
-	font-size: 120%;
-	transition: 0.2s background;
-	cursor: pointer;
-	display: block;
-	@media( min-width: 500px ){
-		display: inline-block;
-		+ .mmp-calculator__button {
-			margin-left: 6px;
-		}
-	}
-	&:hover {
-		background: rgba( #ffc20d, 85% );
-	}
-	&:disabled {
-		cursor: default;
-		background: rgba(#ffc20d, 40% );
-		color: #999;
-	}
-}
 .mmp-calculator__copy-message {
 	position: absolute;
 	bottom: 100%;
@@ -460,33 +426,24 @@ export default {
 	display: none;
 	z-index: 2;
 }
+
 .mmp-calculator__share {
 	display: block;
 	margin-top: 20px;
-	&-label {
-		font-weight: bold;
-		display: block;
-		margin-bottom: 5px;
-	}
 	&-input {
 		display: flex;
 		width: 100%;
-		input {
-			height: 2.5rem;
-			padding: 0 6px;
+		.usa-input {
 			flex: 1;
-			border-radius: 0;
-			box-sizing: border-box;
 		}
 	}
 	&-btn {
 		position: relative;
 		color: #08c;
-		display: inline-block;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
 		height: 2.5em;
-		line-height: 2.5em;
-		vertical-align: middle;
-		text-align: center;
 		width: 2.5em;
 		padding: 0;
 		background: #f2f2f2;
@@ -496,100 +453,21 @@ export default {
 	}
 	svg {
 		display: inline-block;
-		vertical-align: text-bottom;
 		height: 1.2em;
 		width: auto;
 	}
 }
 
-.row-fluid + .mmp-calculator__form-group {
-	margin-top: 1.5em;
-}
-
-.input-wrap {
-	display: table;
-	border-radius: 4px;
-	width: 100%;
-
-	&.-fit {
-		width: auto;
-	}
-	> * {
-		border: 0;
-		vertical-align: middle;
-		display: table-cell;
-	}
-	&.-bordered > * {
-		border-top: 1px solid #ccc;
-		border-bottom: 1px solid #ccc;
-		&:first-child {
-			border-radius: 0px 0 0 0px;
-			border-left: 1px solid #ccc;
-		}
-		&:last-child {
-			border-radius: 0 0px 0px 0;
-			border-right: 1px solid #ccc;
-		}
-		+ * {
-			border-left: 1px solid #ccc;
-		}
-	}
-	> input[type="text"],
-	> input[type="number"]{
-		padding: 8px 12px;
-		font-size: 1.1rem;
-		line-height: 1.5;
-		margin: 0;
-		display: block;
-	}
-	> select {
-		display: block;
-		border: 1px solid #ccc;
-		font-size: 15px;
-
-	}
-	&.-radios {
-		margin-left: -10px;
-		 > label {
-			 font-size: 1rem;
-			 padding: 4px 10px;
-			 line-height: 1.5;
-			 > input {
-				 font-size: 1rem;
-				 line-height: 1.5;
-				 vertical-align: middle;
-				 margin-right: 6px;
-				 margin-top: -1px;
-			 }
-		 }
-	}
-}
-
-.input-context {
-	width: 1em;
-	padding: 1px .5em;
-	text-align: center;
-	background: #f6f6f6;
-	font-size: 1.1rem;
-	color: #888;
-}
-
-.input-number {
-	width: 7em;
-	text-align: left;
-}
-
 .-limits-footnote {
+	display: block;
+	margin-top: 0.5rem;
 	font-size: 12px;
 	font-weight: 400;
-	padding-left: 0 !important;
-	width: auto !important;
 	p {
 		font-size: inherit !important;
 		line-height: 1.5;
 	}
 }
-
 </style>
 
 <style lang="scss">
