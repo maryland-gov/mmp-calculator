@@ -1,71 +1,85 @@
 <template lang="pug">
-.mmp-calculator__results
+.mmp-calculator__results.usa-prose
 	template(v-if="hasEnoughInformation")
-		h2.mmp-calculator__results-heading(
+		h2(
 			v-html="eligibleHeading",
 			v-tooltip.top-start="eligibleHeadingTooltip"
 		)
 
 		.mmp-calculator__results-eligible(v-if="isEligible")
-			.usa-alert.usa-alert--success
+			.usa-alert.usa-alert--success.usa-alert--slim.usa-alert--no-icon
 				.usa-alert__body
-					.usa-alert__text(v-html="eligibleMessage")
+					div.usa-alert__text(v-html="eligibleMessage")
 
 		.mmp-calculator__results-ineligible(v-else)
-			.usa-alert.usa-alert--warning
+			.usa-alert.usa-alert--warning.usa-alert--slim.usa-alert--no-icon
 				.usa-alert__body
-					.usa-alert__text(v-html="ineligibleMessage")
+					div.usa-alert__text(v-html="ineligibleMessage")
 
-			.usa-alert.usa-alert--error(
+			.usa-alert.usa-alert--error.usa-alert--slim.usa-alert--no-icon(
 				v-for="(reason, index) in ineligibleReasons",
 				:key="index"
 			)
 				.usa-alert__body
-					.usa-alert__text(v-html="reason")
+					div.usa-alert__text(v-html="reason")
 
 		template(v-if="isEligible")
-			h2.mmp-calculator__results-heading.-sticky(
-				v-html="productsHeading",
-				v-tooltip.top-start="productsHeadingTooltip"
-			)
-			ul.mmp-calculator__results-products
-				li.usa-card(v-for="product in recommendedProducts", :key="product.name")
-					.usa-card__container
-						.usa-card__header
-							h4.usa-card__heading {{ product.name }}
-						.usa-card__body
-							p {{ product.description }}
-							div.mmp-calculator__results-types-ct
-								table.usa-table.usa-table--striped.mmp-calculator__results-types(:class="{'usa-table--stacked': !useTables}")
-									thead(v-if="useTables")
-										tr
-											th(scope="col")
-											th.t-right(scope="col")
-												span(
-													v-html="interestRateText",
-													v-tooltip="{content: interestRateTooltip, trigger: 'hover click'}"
-												)
-											th.t-right(scope="col")
-												span(
-													v-html="monthlyPaymentText",
-													v-tooltip="{content: monthlyPaymentTooltip, trigger: 'hover click'}"
-												)
+			section.maryland-accordion(aria-labelledby="products-heading")
+				.maryland-accordion__list
+					h2.maryland-accordion__list--heading(
+						id="products-heading",
+						v-html="productsHeading",
+						v-tooltip.top-start="productsHeadingTooltip"
+					)
+				.maryland-accordion__items
+					.maryland-accordion__item(v-for="(product, index) in recommendedProducts", :key="product.name")
+						h3.maryland-accordion__heading
+							button.maryland-accordion__button(
+								type="button",
+								:id="'product-btn-' + index",
+								:aria-expanded="isExpanded(index)",
+								:aria-controls="'product-content-' + index",
+								@click="toggleAccordion(index)"
+							) {{ product.name }}
+						.maryland-accordion__content(
+							role="region",
+							:id="'product-content-' + index",
+							:aria-labelledby="'product-btn-' + index",
+							:hidden="!isExpanded(index)"
+						)
+							.usa-prose
+								p {{ product.description }}
+								div.mmp-calculator__results-types-ct
+									table.usa-table.usa-table--striped.mmp-calculator__results-types(:class="{'usa-table--stacked': !useTables}")
+										thead(v-if="useTables")
+											tr
+												th(scope="col")
+												th.t-right(scope="col")
+													span(
+														v-html="interestRateText",
+														v-tooltip="{content: interestRateTooltip, trigger: 'hover click'}"
+													)
+												th.t-right(scope="col")
+													span(
+														v-html="monthlyPaymentText",
+														v-tooltip="{content: monthlyPaymentTooltip, trigger: 'hover click'}"
+													)
 
-									tbody
-										tr.mmp-calculator__result-type(v-for="type in product.types", :key="type.type")
-											th(scope="row", data-label="Type") {{ type.type }}
-											td.t-right(data-label="Interest Rate")
-												span.mmp-calculator__result-value {{ type.interestRate }}
-											td.t-right(data-label="Monthly Payment (P & I)")
-												span.mmp-calculator__result-value.warn(v-if="warn(getMonthlyPayment( type.interestRate, true ))")
-													| ${{ getMonthlyPayment( type.interestRate, true ).amount }}
-												span.mmp-calculator__result-value(v-else,:title="JSON.stringify(getMonthlyPayment( type.interestRate, true ))")
-													| ${{ getMonthlyPayment( type.interestRate, true ).amount }}
+										tbody
+											tr.mmp-calculator__result-type(v-for="type in product.types", :key="type.type")
+												th(scope="row", data-label="Type") {{ type.type }}
+												td.t-right(data-label="Interest Rate")
+													span.mmp-calculator__result-value {{ type.interestRate }}
+												td.t-right(data-label="Monthly Payment (P & I)")
+													span.mmp-calculator__result-value.warn(v-if="warn(getMonthlyPayment( type.interestRate, true ))")
+														| ${{ getMonthlyPayment( type.interestRate, true ).amount }}
+													span.mmp-calculator__result-value(v-else,:title="JSON.stringify(getMonthlyPayment( type.interestRate, true ))")
+														| ${{ getMonthlyPayment( type.interestRate, true ).amount }}
 
 	template(v-else)
-		.usa-alert.usa-alert--info
+		.usa-alert.usa-alert--info.usa-alert--slim.usa-alert--no-icon
 			.usa-alert__body
-				.usa-alert__text(v-html="emptyText")
+				div.usa-alert__text(v-html="emptyText")
 </template>
 
 <script>
@@ -90,7 +104,8 @@ export default {
 	data: function() {
 		return {
 			copy: copy,
-			useTables: true
+			useTables: true,
+			expandedAccordions: []
 		};
 	},
 
@@ -291,6 +306,18 @@ export default {
 			this.useTables = this.$el.clientWidth > 320;
 		},
 
+		isExpanded : function(index){
+			return this.expandedAccordions.includes(index);
+		},
+
+		toggleAccordion : function(index){
+			if (this.isExpanded(index)) {
+				this.expandedAccordions = this.expandedAccordions.filter(i => i !== index);
+			} else {
+				this.expandedAccordions.push(index);
+			}
+		},
+
 		getLoanAmount : function( interestRate ){
 			var rate = num(interestRate) / 1200.0;
 			var power = 1.0;
@@ -363,103 +390,18 @@ export default {
 </script>
 
 <style lang="scss">
-.has-tooltip{
-	border-bottom: 1px dotted #aaa;
+// Strip margins from alert content
+.usa-alert__text {
+	> :first-child { margin-top: 0; }
+	> :last-child { margin-bottom: 0; }
 }
 
-.mmp-calculator {
-	strong {
-		font-weight: bold !important;
-	}
+// Table alignment helper
+.t-right { text-align: right; }
 
-	&__results {
-		text-align: left;
-
-		* {
-			&:first-child {
-				margin-top: 0 !important;
-			}
-			&:last-child {
-				margin-bottom: 0 !important;
-			}
-		}
-
-		p {
-			width: auto !important;
-			padding-left: 0 !important;
-			font-size: 15px;
-		}
-
-		&-heading {
-			width: auto;
-			padding-left: 0;
-			text-align: center;
-			margin-bottom: 1em;
-			padding-top: 0.4em;
-			padding-bottom: 0.4em;
-			border-left: 2px solid #FFC20D;
-			background: rgba(#FFC20D, 0.25);
-			padding-left: 10px;
-		}
-
-		.usa-alert {
-			margin-bottom: 1rem;
-		}
-
-		&-products {
-			text-align: left;
-			margin: 0;
-			padding: 0;
-			list-style: none;
-
-			.usa-card {
-				margin: 0;
-				padding: 0;
-
-				+ .usa-card {
-					margin-top: 2rem;
-				}
-			}
-
-			.usa-card__container {
-				border-color: #ccc;
-				box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-			}
-
-			.usa-card__heading {
-				font-size: 18px;
-			}
-
-			.usa-card__body {
-				padding-top: 0;
-
-				p {
-					font-size: 13px;
-					margin-bottom: 1rem;
-				}
-			}
-		}
-	}
-
-	&__results-types-ct {
-		overflow: hidden;
-	}
-
-	&__results-types {
-		width: 100%;
-		margin-bottom: 0;
-
-		th.t-right,
-		td.t-right {
-			text-align: right;
-		}
-	}
-
-	&__result-value {
-		&.warn {
-			color: #b50909;
-			font-weight: bold;
-		}
-	}
+// Warning color for high payments
+.mmp-calculator__result-value.warn {
+	color: var(--maryland-color-error-dark);
+	font-weight: bold;
 }
 </style>

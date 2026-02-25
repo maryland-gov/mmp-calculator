@@ -65,41 +65,11 @@ form.usa-form.mmp-calculator__form(@submit.prevent="calculate")
 			type="submit",
 			:disabled="calculateButtonDisabled"
 		) {{ calculateButtonText }}
-		| &nbsp;
 		button.usa-button.usa-button--outline(
 			v-if="showPrintButton",
 			type="button",
 			@click="print"
 		) {{ printButtonText }}
-
-		br
-
-		.mmp-calculator__share(v-if="showPrintButton")
-			label.usa-label Share your results
-			.usa-input-group.mmp-calculator__share-input
-				input.usa-input(
-					type="text",
-					:value="shareableUrl",
-					readonly
-				)
-				a.mmp-calculator__share-btn(
-					target="_blank",
-					:href="shareableUrl",
-					@click="copyToClipboard"
-				)
-					svg(aria-hidden="true" focusable="false" data-prefix="far" data-icon="copy" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512")
-						path(fill="currentColor" d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z")
-					div.mmp-calculator__copy-message(
-						v-html="copyMessage",
-						:class="{'animated fadeInUp': !!copyMessage}"
-					)
-
-				a.mmp-calculator__share-btn(
-					target="_blank",
-					:href="mailToUrl"
-				)
-					svg(aria-hidden="true" focusable="false" data-prefix="far" data-icon="envelope" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512")
-						path(fill="currentColor" d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z")
 </template>
 
 <script>
@@ -121,8 +91,7 @@ export default {
 	
 	data: function() {
 		return {
-			formdata:{},
-			copyMessage: ""
+			formdata:{}
 		};
 	},
 	
@@ -206,18 +175,6 @@ export default {
 				}
 			}
 			return 'Question '+count+' of '+this.fields.length;
-		},
-		
-		shareableUrl : function(){
-			let url = location.protocol+'//'+location.hostname+(location.port?":"+location.port:"")+location.pathname+(location.search?location.search:"");
-			url+='#'+(btoa(JSON.stringify(this.values.data)));
-			return url;
-		},
-		
-		mailToUrl : function(){
-			let subject = encodeURIComponent(copy.get("Email Subject",{},true));
-			let url = encodeURIComponent(this.shareableUrl);
-			return `mailto:?to=&subject=${subject}&body=${this.shareableUrl}`;
 		}
 	},
 	
@@ -340,133 +297,32 @@ export default {
 		
 		preventDefault : function(e){
 			e.preventDefault();
-		},
-
-		copyToClipboard : function(e){
-			e.preventDefault();
-			navigator.clipboard.writeText(this.shareableUrl).then(() => {
-				this.copyMessage = 'The link has been copied!';
-			}).catch(() => {
-				this.copyMessage = 'Press Ctrl+C to copy the link';
-			});
-			clearTimeout(this.copyMessageTimeout);
-			this.copyMessageTimeout = setTimeout(() => {
-				this.copyMessage = '';
-			}, 3000);
 		}
 	}
 };
 </script>
 
 <style lang="scss">
-.mmp-calculator__form {
-	@media print {
-		display: flex;
-		flex-wrap: wrap;
-	}
-
-	.usa-form-group {
-		@media print {
-			width: 50%;
-			margin-bottom: 2rem;
-		}
-	}
-
-	.usa-label {
-		.tooltip-icon {
-			position: relative;
-			margin-left: 0.25rem;
-			top: -0.1em;
-		}
-	}
-
-	.usa-hint {
-		display: block;
-		p {
-			font-size: 14px;
-			margin-bottom: 0 !important;
-		}
-	}
-
-	.usa-radio-group {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		margin-top: 0.5rem;
-		.usa-radio {
-			margin-top: 0;
-		}
-	}
-
-	&-actions {
-		margin-top: 1.5rem;
-		padding-top: 1rem;
-		@media print {
-			display: none;
-		}
-		.usa-button + .usa-button {
-			margin-left: 0.5rem;
-		}
-	}
-}
-
-.mmp-calculator__copy-message {
-	position: absolute;
-	bottom: 100%;
-	left: 50%;
-	transform: translateX(-50%);
-	margin-bottom: 10px;
-	background: rgba(0,0,0,0.9);
-	color: #fff;
-	pointer-events: none;
-	font-size: 12px;
-	white-space: nowrap;
-	padding: 2px 10px;
-	line-height: 1.5;
-	display: none;
-	z-index: 2;
-}
-
-.mmp-calculator__share {
-	display: block;
-	margin-top: 20px;
-	&-input {
-		display: flex;
-		width: 100%;
-		.usa-input {
-			flex: 1;
-		}
-	}
-	&-btn {
-		position: relative;
-		color: #08c;
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		height: 2.5em;
-		width: 2.5em;
-		padding: 0;
-		background: #f2f2f2;
-		border: 1px solid #d8d8d8;
-		box-sizing: border-box;
-		margin-left: -1px;
-	}
-	svg {
-		display: inline-block;
-		height: 1.2em;
-		width: auto;
-	}
-}
-
-.-limits-footnote {
-	display: block;
+// Horizontal radio layout (not available in MDWDS)
+.usa-radio-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
 	margin-top: 0.5rem;
-	font-size: 12px;
-	font-weight: 400;
-	p {
-		font-size: inherit !important;
-		line-height: 1.5;
-	}
+	.usa-radio { margin-top: 0; }
+}
+
+// Custom tooltip icon positioning
+.tooltip-icon {
+	position: relative;
+	margin-left: 0.25rem;
+	top: -0.1em;
+}
+
+.mmp-calculator__form-actions {
+	display: flex;
+	gap: 0.5rem;
+	@media print { display: none; }
 }
 </style>
 
@@ -480,46 +336,5 @@ export default {
 .forminput-enter-from, .forminput-leave-to {
   transform: translateX(10px);
   opacity: 0;
-}
-
-
-@keyframes fadeInUp {
-    from {
-        transform: translate3d(-50%,15px,0)
-    }
-
-    to {
-        transform: translate3d(-50%,0,0);
-        opacity: 1
-    }
-}
-
-@-webkit-keyframes fadeInUp {
-    from {
-        transform: translate3d(-50%,10px,0);
-    }
-
-    to {
-        transform: translate3d(-50%,0,0);
-        opacity: 1;
-    }
-}
-
-.animated {
-	display: block;
-    animation-duration: 0.2s;
-    animation-fill-mode: both;
-    -webkit-animation-duration: 0.2s;
-    -webkit-animation-fill-mode: both
-}
-
-.animatedFadeInUp {
-    opacity: 0
-}
-
-.fadeInUp {
-    opacity: 0;
-    animation-name: fadeInUp;
-    -webkit-animation-name: fadeInUp;
 }
 </style>

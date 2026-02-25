@@ -223,38 +223,22 @@ export default {
 
 <style lang="scss">
 .mmp-calculator {
-	text-align: left;
 	padding: 20px 0;
-	line-height: 1.5;
-	p {
-		width: auto !important;
-		padding-left: 0 !important;
-	}
-	[class*="grid-col"] {
-		margin-bottom: 2em;
-	}
-	@media( min-width: 768px ){
-		.sticky {
-			position: sticky;
-			top: 10px;
-		}
-	}
 }
 .tooltip-icon {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	border-radius: 50%;
 	width: 1.1em;
 	height: 1.1em;
-	text-align: center;
 	vertical-align: middle;
-	line-height: 1.1em;
 	color: #333;
-	background-color: #FFC20D;
+	background-color: var(--maryland-color-accent-warm-light);
 	&:before {
 		font-size: 0.8em;
 		content: '?';
 	}
-	
 }
 .tooltip {
   display: block !important;
