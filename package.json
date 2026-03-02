@@ -4,8 +4,8 @@
   "description": "Maryland Mortgage Program Calculator",
   "private": true,
   "scripts": {
-    "serve": "parcel serve index.html",
-    "build": "parcel build index.js --dist-dir dist"
+    "serve": "npm run build && parcel serve index.html",
+    "build": "parcel build index.js --dist-dir dist --no-cache"
   },
   "author": "State of Maryland",
   "license": "MIT",
