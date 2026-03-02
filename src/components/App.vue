@@ -2,28 +2,28 @@
 .mmp-calculator
 	template(v-if="initialized")
 		.grid-container
-			.grid-row.grid-gap
-				div(class="tablet:grid-col-6")
-					calculator-form(
-						ref="form",
-						:values="values",
-						:settings="settings",
-						:limits="limits",
-						:counties="counties"
-						:fields="fields"
-						:initialized="initialized"
-						@calculate="scrollToResults"
-					)
-				div(class="tablet:grid-col-6")
-					results(
-						ref="results",
-						:fields="fields",
-						:values="values",
-						:products="products",
-						:limits="limits",
-						:settings="settings",
-						:initialized="initialized"
-					)
+			div(class="margin-bottom-4")
+				calculator-form(
+					ref="form",
+					:values="values",
+					:settings="settings",
+					:limits="limits",
+					:counties="counties"
+					:fields="fields"
+					:initialized="initialized"
+					@calculate="scrollToResults"
+				)
+			div(class="margin-top-4")
+				results(
+					ref="results",
+					:fields="fields",
+					:values="values",
+					:products="products",
+					:limits="limits",
+					:settings="settings",
+					:initialized="initialized"
+				)
+
 	.loading(v-else) Loading
 </template>
 
@@ -79,7 +79,7 @@ export default {
 			this.parseSettings(response.data.valueRanges[2]);
 			this.parseCopy(response.data.valueRanges[3]);
 			this.parseFields(response.data.valueRanges[4]);
-			
+
 			// initialized
 			this.initialized = true;
 
@@ -92,7 +92,7 @@ export default {
 		// this.loadProducts();
 		// this.loadLimits();
 	},
-	
+
 	mounted : function(){
 		// do we have data from the url?
 		if( window.location.hash ){
@@ -177,7 +177,7 @@ export default {
 				}
 			});
 		},
-		
+
 		parseCopy: function(rangeData) {
 			rangeData.values.forEach(row => {
 				if (row.length > 1) {
@@ -185,7 +185,7 @@ export default {
 				}
 			});
 		},
-		
+
 		parseFields: function(rangeData) {
 			this.fields = [];
 			let keys = false;
@@ -209,7 +209,7 @@ export default {
 				this.fields.push( field );
 			});
 		},
-		
+
 		scrollToResults : function(e){
 			if( !this.$el ){
 				return;
