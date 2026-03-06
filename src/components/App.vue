@@ -1,8 +1,8 @@
 <template lang="pug">
 .mmp-calculator
 	template(v-if="initialized")
-		.row-fluid
-			.col.span6
+		.grid-container
+			div(class="margin-bottom-4")
 				calculator-form(
 					ref="form",
 					:values="values",
@@ -13,7 +13,7 @@
 					:initialized="initialized"
 					@calculate="scrollToResults"
 				)
-			.col.span6
+			div(class="margin-top-4")
 				results(
 					ref="results",
 					:fields="fields",
@@ -23,6 +23,7 @@
 					:settings="settings",
 					:initialized="initialized"
 				)
+
 	.loading(v-else) Loading
 </template>
 
@@ -78,7 +79,7 @@ export default {
 			this.parseSettings(response.data.valueRanges[2]);
 			this.parseCopy(response.data.valueRanges[3]);
 			this.parseFields(response.data.valueRanges[4]);
-			
+
 			// initialized
 			this.initialized = true;
 
@@ -91,7 +92,7 @@ export default {
 		// this.loadProducts();
 		// this.loadLimits();
 	},
-	
+
 	mounted : function(){
 		// do we have data from the url?
 		if( window.location.hash ){
@@ -176,7 +177,7 @@ export default {
 				}
 			});
 		},
-		
+
 		parseCopy: function(rangeData) {
 			rangeData.values.forEach(row => {
 				if (row.length > 1) {
@@ -184,7 +185,7 @@ export default {
 				}
 			});
 		},
-		
+
 		parseFields: function(rangeData) {
 			this.fields = [];
 			let keys = false;
@@ -208,7 +209,7 @@ export default {
 				this.fields.push( field );
 			});
 		},
-		
+
 		scrollToResults : function(e){
 			if( !this.$el ){
 				return;
@@ -222,45 +223,22 @@ export default {
 
 <style lang="scss">
 .mmp-calculator {
-	text-align: left;
-	margin: 20px 30px;
-	@media( min-width: 800px ){
-		margin: 20px 60px;
-	}
-	@media( min-width: 1200px ){
-		margin: 20px auto;
-		width: 80%;
-	}
-	line-height: 1.5;
-	p {
-		width: auto !important;
-		padding-left: 0 !important;
-	}
-	.col {
-		margin-bottom: 2em;
-	}
-	@media( min-width: 768px ){
-		.sticky {
-			position: sticky;
-			top: 10px;
-		}
-	}
+	padding: 20px 0;
 }
 .tooltip-icon {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	border-radius: 50%;
 	width: 1.1em;
 	height: 1.1em;
-	text-align: center;
 	vertical-align: middle;
-	line-height: 1.1em;
 	color: #333;
-	background-color: #FFC20D;
+	background-color: var(--maryland-color-accent-warm-light);
 	&:before {
 		font-size: 0.8em;
 		content: '?';
 	}
-	
 }
 .tooltip {
   display: block !important;

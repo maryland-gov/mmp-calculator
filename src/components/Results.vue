@@ -1,5 +1,5 @@
 <template lang="pug">
-.mmp-calculator__results
+.mmp-calculator__results.usa-prose
 	template(v-if="hasEnoughInformation")
 		h2(
 			v-html="eligibleHeading",
@@ -7,63 +7,79 @@
 		)
 
 		.mmp-calculator__results-eligible(v-if="isEligible")
-			.mmp-calculator__results-message.-eligible
-				div.mmp-calculator__message(v-html="eligibleMessage")
+			.usa-alert.usa-alert--success.usa-alert--slim.usa-alert--no-icon
+				.usa-alert__body
+					div.usa-alert__text(v-html="eligibleMessage")
 
 		.mmp-calculator__results-ineligible(v-else)
-			.mmp-calculator__results-message.-ineligible(
-					v-html="ineligibleMessage"
-				)
+			.usa-alert.usa-alert--warning.usa-alert--slim.usa-alert--no-icon
+				.usa-alert__body
+					div.usa-alert__text(v-html="ineligibleMessage")
 
-			div.mmp-calculator__message.-error(
+			.usa-alert.usa-alert--error.usa-alert--slim.usa-alert--no-icon(
 				v-for="(reason, index) in ineligibleReasons",
-			:key="index",
-				v-html="reason"
+				:key="index"
 			)
+				.usa-alert__body
+					div.usa-alert__text(v-html="reason")
 
 		template(v-if="isEligible")
-			h2.-sticky(
-				v-html="productsHeading",
-				v-tooltip.top-start="productsHeadingTooltip"
-			)
-			ul.mmp-calculator__results-products
-				li(v-for="product in recommendedProducts", :key="product.name")
-					h4 {{ product.name }}
-					p {{ product.description }}
-					div.mmp-calculator__results-types-ct
-						table.mmp-calculator__results-types(:class="{'-mobile': !useTables}")
-							thead(v-if="useTables")
-								tr
-									th
-									th.t-right
-										span(
-											v-html="interestRateText",
-											v-tooltip="{content: interestRateTooltip, trigger: 'hover click'}"
-										)
-									th.t-right 
-										span(
-											v-html="monthlyPaymentText",
-											v-tooltip="{content: monthlyPaymentTooltip, trigger: 'hover click'}"
-										)
-									
-							tbody
-								tr.mmp-calculator__result-type(v-for="type in product.types", :key="type.type")
-									td.type {{ type.type }}
-									td.rate.t-right 
-										span.mmp-calculator__result-value {{ type.interestRate }}
-										span.mmp-calculator__result-label(v-if="!useTables") Interest Rate
-									td.loanAmount.t-right
-										span.mmp-calculator__result-value.warn(v-if="warn(getMonthlyPayment( type.interestRate, true ))")
-											| ${{ getMonthlyPayment( type.interestRate, true ).amount }}
-										span.mmp-calculator__result-value(v-else,:title="JSON.stringify(getMonthlyPayment( type.interestRate, true ))") 
-											| ${{ getMonthlyPayment( type.interestRate, true ).amount }}
-										span.mmp-calculator__result-label(v-if="!useTables") Monthly Payment<br /><nobr>(P &amp; I)</nobr>
-								
-							
-						
-						
+			section.maryland-accordion(aria-labelledby="products-heading")
+				.maryland-accordion__list
+					h2.maryland-accordion__list--heading(
+						id="products-heading",
+						v-html="productsHeading",
+						v-tooltip.top-start="productsHeadingTooltip"
+					)
+				.maryland-accordion__items
+					.maryland-accordion__item(v-for="(product, index) in recommendedProducts", :key="product.name")
+						h3.maryland-accordion__heading
+							button.maryland-accordion__button(
+								type="button",
+								:id="'product-btn-' + index",
+								:aria-expanded="isExpanded(index)",
+								:aria-controls="'product-content-' + index",
+								@click="toggleAccordion(index)"
+							) {{ product.name }}
+						.maryland-accordion__content(
+							role="region",
+							:id="'product-content-' + index",
+							:aria-labelledby="'product-btn-' + index",
+							:hidden="!isExpanded(index)"
+						)
+							.usa-prose
+								p {{ product.description }}
+								div.mmp-calculator__results-types-ct
+									table.usa-table.usa-table--striped.mmp-calculator__results-types(:class="{'usa-table--stacked': !useTables}")
+										thead(v-if="useTables")
+											tr
+												th(scope="col")
+												th.t-right(scope="col")
+													span(
+														v-html="interestRateText",
+														v-tooltip="{content: interestRateTooltip, trigger: 'hover click'}"
+													)
+												th.t-right(scope="col")
+													span(
+														v-html="monthlyPaymentText",
+														v-tooltip="{content: monthlyPaymentTooltip, trigger: 'hover click'}"
+													)
+
+										tbody
+											tr.mmp-calculator__result-type(v-for="type in product.types", :key="type.type")
+												th(scope="row", data-label="Type") {{ type.type }}
+												td.t-right(data-label="Interest Rate")
+													span.mmp-calculator__result-value {{ type.interestRate }}
+												td.t-right(data-label="Monthly Payment (P & I)")
+													span.mmp-calculator__result-value.warn(v-if="warn(getMonthlyPayment( type.interestRate, true ))")
+														| ${{ getMonthlyPayment( type.interestRate, true ).amount }}
+													span.mmp-calculator__result-value(v-else,:title="JSON.stringify(getMonthlyPayment( type.interestRate, true ))")
+														| ${{ getMonthlyPayment( type.interestRate, true ).amount }}
+
 	template(v-else)
-		div.mmp-calculator__empty-text(v-html="emptyText")
+		.usa-alert.usa-alert--info.usa-alert--slim.usa-alert--no-icon
+			.usa-alert__body
+				div.usa-alert__text(v-html="emptyText")
 </template>
 
 <script>
@@ -88,15 +104,16 @@ export default {
 	data: function() {
 		return {
 			copy: copy,
-			useTables: true
+			useTables: true,
+			expandedAccordions: []
 		};
 	},
-	
+
 	mounted : function(){
 		window.addEventListener('resize', this.onResize.bind(this) );
 		this.onResize();
 	},
-	
+
 	beforeUnmount : function(){
 		window.removeEventListener('resize', this.onResize.bind(this) );
 	},
@@ -140,7 +157,7 @@ export default {
 				return 1;
 			});
 		},
-		
+
 		vals : function(){
 			return this.values.data;
 		},
@@ -170,7 +187,7 @@ export default {
 					purchase_price: '$'+addCommas( this.vals.purchasePrice )
 				}));
 			}
-			
+
 			if( this.vals.isPrimaryResidence == "N" ){
 				reasons.push( copy.get( 'Error: Primary Residence',{}) );
 			}
@@ -189,7 +206,7 @@ export default {
 
 			let maxMortgage = this.countyLimit.getMaxMortgageAmount();
 			if( num(this.vals.purchasePrice)-num(this.vals.downPayment) > maxMortgage ){
-				
+
 				reasons.push( copy.get( 'Loan Amount Exceeded', {
 					loan_amount: '$'+addCommas(num(this.vals.purchasePrice)-num(this.vals.downPayment)),
 					maximum_loan_amount: '$'+addCommas( maxMortgage ),
@@ -225,23 +242,23 @@ export default {
 			}
 			return true;
 		},
-		
+
 		eligibleHeading : function(){
 			return copy.get('Eligible Heading', {}, true );
 		},
-		
+
 		eligibleHeadingTooltip : function(){
 			return copy.get('Eligible Heading Tooltip', {}, true, true);
 		},
-		
+
 		productsHeading : function(){
 			return copy.get('Products Heading', {}, true);
 		},
-		
+
 		productsHeadingTooltip : function(){
 			return copy.get('Products Heading Tooltip', {}, true, true);
 		},
-		
+
 		eligibleMessage : function(){
 			return copy.get("Eligible Message", {
 				county: this.vals.location,
@@ -252,7 +269,7 @@ export default {
 				maximum_mortgage: '$'+this.countyLimit.getMaxMortgageAmount( true )
 			});
 		},
-		
+
 		ineligibleMessage : function(){
 			return copy.get("Ineligible Message", {
 				county: this.vals.location,
@@ -263,30 +280,42 @@ export default {
 				maximum_mortgage: '$'+this.countyLimit.getMaxMortgageAmount( true )
 			});
 		},
-		
+
 		interestRateText : function(){
 			return copy.get("Interest Rate", {}, true)
 		},
 		interestRateTooltip : function(){
 			return copy.get("Interest Rate Tooltip", {}, true, true);
 		},
-		
+
 		monthlyPaymentText : function(){
 			return copy.get("Monthly Payment", {}, true);
 		},
 		monthlyPaymentTooltip : function(){
 			return copy.get("Monthly Payment Tooltip", {}, true, true);
 		},
-		
+
 		emptyText : function(){
 			return copy.get("Empty Form", {}, false, true);
 		}
 	},
 
 	methods : {
-		
+
 		onResize : function(){
 			this.useTables = this.$el.clientWidth > 320;
+		},
+
+		isExpanded : function(index){
+			return this.expandedAccordions.includes(index);
+		},
+
+		toggleAccordion : function(index){
+			if (this.isExpanded(index)) {
+				this.expandedAccordions = this.expandedAccordions.filter(i => i !== index);
+			} else {
+				this.expandedAccordions.push(index);
+			}
 		},
 
 		getLoanAmount : function( interestRate ){
@@ -313,7 +342,7 @@ export default {
 				let amount = round(monthly);
 				return {
 					amount: commas ? addCommas( amount ) : amount,
-					
+
 				};
 			}
 
@@ -331,9 +360,9 @@ export default {
 
 			//let x = Math.pow( 1 + interest, payments );
 			//let monthly = ( principal * x * interest ) / ( x - 1 );
-			
+
 			let monthly = P * ( (r * Math.pow(1+r,n)) / (Math.pow(1+r,n) -1) );
-			
+
 			if (!isNaN(monthly) &&  (monthly != Number.POSITIVE_INFINITY) && (monthly != Number.NEGATIVE_INFINITY)) {
 				// if we want to know the total paid
 				let total = round(monthly * n);
@@ -361,175 +390,18 @@ export default {
 </script>
 
 <style lang="scss">
-.has-tooltip{
-	border-bottom: 1px dotted #aaa;
+// Strip margins from alert content
+.usa-alert__text {
+	> :first-child { margin-top: 0; }
+	> :last-child { margin-bottom: 0; }
 }
-.mmp-calculator {
 
-	&__message {
-		padding: 0px !important;
-		margin: 20px 0;
-		& + & {
-			margin-top: 10px;
-		}
-		&.-error {
-			padding: 15px !important;
-			border: 1px solid #ed1c24;
-			background-color: rgba( #ed1c24, 0.1 );
-		}
-	}
+// Table alignment helper
+.t-right { text-align: right; }
 
-	strong {
-		font-weight: bold !important;
-	}
-	
-	&__empty-text {
-		background: #f2f2f2;
-		padding: 20px;
-		border: 1px solid #d8d8d8;
-	}
-
-	&__results {
-		text-align: left;
-		
-		* {
-			&:first-child {
-				margin-top: 0 !important;
-			}
-			&:last-child {
-				margin-bottom: 0 !important;
-			}
-		}
-
-		h2 {
-			width: auto;
-			padding-left: 0;
-			text-align: center;
-			margin-bottom: 1em;
-			padding-top: 0.4em;
-			padding-bottom: 0.4em;
-			border-left: 2px solid #FFC20D;
-			background: rgba(#FFC20D, 0.25);
-			padding-left: 10px;
-		}
-
-		p {
-			width: auto !important;
-			padding-left: 0 !important;
-			font-size: 15px;
-		}
-
-		&-products {
-			text-align: left;
-			margin: 0;
-			padding: 0;
-			li {
-				padding: 10px;
-				list-style: none;
-				padding: 0;
-				margin: 0;
-				text-align: left;
-				border: 1px solid #ccc;
-				box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-				h4 {
-					width: auto;
-					padding: 0 20px;
-					margin-bottom: 0.75em;
-					font-size: 18px;
-					&:first-child {
-						margin-top: 10px !important;
-						margin-bottom: 10px !important;
-					}
-				}
-				p {
-					width: auto !important;
-					padding: 0 20px !important;
-					font-size: 13px;
-				}
-				+ li {
-					margin-top: 40px;
-				}
-			}
-		}
-	}
-	&__result {
-		&-type {
-			span {
-				line-height: 1.4;
-			}
-		}
-		&-value {
-			.-mobile &{
-				font-size: 16px;
-				font-weight: bold;
-			}
-		}
-		&-label {
-			display: block;
-			font-size: 12px;
-			padding-bottom: 6px;
-		}
-	}
-	&__results-types-ct {
-		overflow: hidden;
-	}
-	&__results-types {
-		text-align: left;
-		font-size: 14px;
-		width: 100%;
-		border-top: 1px solid #d8d8d8;
-		border-collapse: collapse;
-		th {
-			text-align: left;
-			line-height: 1.4;
-		}
-		thead {
-			background: #f2f2f2;
-			tr {
-				vertical-align: top;
-			}
-		}
-		tbody {
-			tr {
-				vertical-align: top;
-				border-bottom: 1px solid #f6f6f6;
-				&:last-child {
-					border-bottom-width: 0;
-				}
-				&:nth-child(even){
-					background: #f8f8f8;
-				}
-			}
-		}
-		td,th {
-			text-align: left;
-			padding: 2px 15px;
-			&.t-right{
-				text-align: right;
-			}
-		}
-		&.-mobile {
-			tr {
-				display: block;
-			}
-			th,td {
-				text-align: center;
-				width: 45%;
-				padding: 2px 2.5%;
-				float: left;
-				&:first-child {
-					display: block;
-					font-weight: bold;
-					background: #f6f6f6;
-					width: 95%;
-					padding: 2px 2.5%;
-				}
-			}
-			th:first-child {
-				display: none;
-			}
-		}
-	}
-
+// Warning color for high payments
+.mmp-calculator__result-value.warn {
+	color: var(--maryland-color-error-dark);
+	font-weight: bold;
 }
 </style>

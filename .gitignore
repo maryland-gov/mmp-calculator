@@ -9,10 +9,9 @@ yarn-error.log
 
 # npm run serve artifacts
 dist/index.html
+dist/*.map
 dist/mmp-calculator.*.css
-dist/mmp-calculator.*.css.map
 dist/mmp-calculator.*.js
-dist/mmp-calculator.*.js.map
 
 # Editor directories and files
 .idea
